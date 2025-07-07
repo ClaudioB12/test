@@ -1,0 +1,49 @@
+<mat-card>
+  <mat-card-title>{{ esEdicion ? 'Editar Producto' : 'Agregar Producto' }}</mat-card-title>
+
+  <form [formGroup]="productoForm" (ngSubmit)="guardar()" class="product-form">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" required>
+      <mat-error *ngIf="productoForm.get('nombre')?.invalid && productoForm.get('nombre')?.touched">
+        El nombre es requerido.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <input matInput formControlName="descripcion" required>
+      <mat-error *ngIf="productoForm.get('descripcion')?.invalid && productoForm.get('descripcion')?.touched">
+        La descripción es requerida.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Cantidad</mat-label>
+      <input matInput formControlName="cantidad" type="number" min="0" required>
+      <mat-error *ngIf="productoForm.get('cantidad')?.invalid && productoForm.get('cantidad')?.touched">
+        La cantidad debe ser mayor o igual a 0.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Precio</mat-label>
+      <input matInput formControlName="precio" type="number" min="0" required>
+      <mat-error *ngIf="productoForm.get('precio')?.invalid && productoForm.get('precio')?.touched">
+        El precio debe ser mayor o igual a 0.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" [disabled]="productoForm.invalid">
+        {{ esEdicion ? 'Actualizar' : 'Guardar' }}
+      </button>
+
+      <button mat-raised-button color="warn" type="button" (click)="cancelar()">
+        Cancelar
+      </button>
+    </div>
+
+  </form>
+</mat-card>
